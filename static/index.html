@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Stream Squirrel</title>
+  <link rel="stylesheet" href="/static/styles.css"/>
+</head>
+<body>
+  <div class="wrap">
+    <header class="topbar">
+      <div>
+        <h1>Stream Squirrel</h1>
+        <p class="sub">NDI → AES67 Bridge</p>
+      </div>
+
+      <div class="rightbar">
+        <div class="status">
+          <div class="pill off" id="statusPill">Offline</div>
+          <div class="btnrow">
+            <button class="btn start" id="startBtn">Start</button>
+            <button class="btn stop" id="stopBtn">Stop</button>
+          </div>
+        </div>
+        <img id="brandLogo" class="brandlogo" src="/static/streamsquirrel_logo.png" alt="Stream Squirrel"/>
+      </div>
+    </header>
+
+<section class="panel">
+      <div class="panelhead">
+        <h2>AES67 Output Slots</h2>
+        <p class="hint">Select NDI source + edit stream name before starting. Locked while Live.</p>
+      </div>
+
+      <div class="grid" id="slotsGrid"></div>
+    </section>
+
+    <footer class="foot">
+      <span>Tip: Put Dante devices into AES67 mode and ensure multicast is allowed.</span>
+    </footer>
+  </div>
+
+  <script src="/static/app.js"></script>
+</body>
+</html>

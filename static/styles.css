@@ -1,0 +1,341 @@
+/*
+  Stream Squirrel theme
+  Styling cues pulled from the logo: neon cyan + hot red on deep black,
+  with bold outlines and a little "arcade" glow.
+*/
+:root{
+  /* brand */
+  --cyan:#10b0f0;      /* ~logo cyan */
+  --red:#f01010;       /* ~logo red */
+  --violet:#7a2cff;    /* cyberpunk accent (blend-friendly) */
+
+  /* neutrals */
+  --ink:#06080d;
+  --bg:#070a10;
+  --panel:#0c111b;
+  --panel2:#0a0f18;
+  --text:#eaf3ff;
+  --muted:#9fb1cf;
+  --line:rgba(16,176,240,.25);
+  --line2:rgba(240,16,16,.22);
+
+  /* semantic */
+  --accent:var(--cyan);
+  --danger:var(--red);
+  --ok:rgba(16,176,240,.85);
+
+  --r-lg:20px;
+  --r-md:14px;
+  --shadow: 0 12px 30px rgba(0,0,0,.45);
+}
+
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  background:
+    radial-gradient(1100px 680px at 14% 0%, rgba(16,176,240,.28) 0%, transparent 60%),
+    radial-gradient(1000px 620px at 92% 8%, rgba(240,16,16,.22) 0%, transparent 58%),
+    radial-gradient(900px 520px at 52% 115%, rgba(122,44,255,.18) 0%, transparent 60%),
+    linear-gradient(135deg, rgba(16,176,240,.09) 0%, rgba(240,16,16,.07) 35%, rgba(122,44,255,.08) 70%, transparent 100%),
+    /* cyber grid */
+    repeating-linear-gradient(0deg, rgba(255,255,255,.03) 0 1px, transparent 1px 26px),
+    repeating-linear-gradient(90deg, rgba(255,255,255,.02) 0 1px, transparent 1px 26px),
+    var(--bg);
+  color:var(--text);
+  position:relative;
+  overflow-x:hidden;
+}
+
+/* scanlines + subtle film grain */
+body:before{
+  content:"";
+  position:fixed; inset:0;
+  pointer-events:none;
+  background:
+    repeating-linear-gradient(0deg, rgba(255,255,255,.04) 0 1px, transparent 1px 4px),
+    linear-gradient(90deg, rgba(16,176,240,.06), transparent 38%, rgba(240,16,16,.05));
+  mix-blend-mode:overlay;
+  opacity:.14;
+  filter: saturate(1.2) contrast(1.1);
+}
+body:after{
+  content:"";
+  position:fixed; inset:-20px;
+  pointer-events:none;
+  background:
+    radial-gradient(circle at 30% 20%, rgba(16,176,240,.14), transparent 55%),
+    radial-gradient(circle at 80% 30%, rgba(240,16,16,.12), transparent 55%),
+    radial-gradient(circle at 55% 80%, rgba(122,44,255,.12), transparent 55%);
+  opacity:.26;
+  filter: blur(18px);
+  animation: ambientPulse 7.5s ease-in-out infinite;
+}
+
+@keyframes ambientPulse{
+  0%,100%{transform: translate3d(0,0,0) scale(1)}
+  50%{transform: translate3d(0,-10px,0) scale(1.04)}
+}
+
+.wrap{max-width:1100px;margin:0 auto;padding:24px}
+.topbar{
+  display:flex;gap:16px;align-items:center;justify-content:space-between;
+  padding:18px 18px;
+  border-radius:var(--r-lg);
+  position:relative;
+  background: linear-gradient(180deg, rgba(12,17,27,.92), rgba(9,12,20,.88));
+  box-shadow: var(--shadow);
+}
+
+/* neon border */
+.topbar:before{
+  content:"";
+  position:absolute; inset:0;
+  border-radius:var(--r-lg);
+  padding:2px;
+  background:
+    linear-gradient(90deg,
+      rgba(16,176,240,1),
+      rgba(122,44,255,.92),
+      rgba(240,16,16,.95),
+      rgba(16,176,240,1)
+    );
+  background-size: 300% 100%;
+  animation: neonShift 5.5s linear infinite;
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite:xor;
+  mask-composite:exclude;
+  pointer-events:none;
+  filter:
+    drop-shadow(0 0 18px rgba(16,176,240,.26))
+    drop-shadow(0 0 18px rgba(240,16,16,.18))
+    drop-shadow(0 0 18px rgba(122,44,255,.16));
+}
+
+@keyframes neonShift{
+  0%{background-position: 0% 50%}
+  100%{background-position: 100% 50%}
+}
+
+/* extra neon bezel */
+.topbar:after{
+  content:"";
+  position:absolute; inset:10px;
+  border-radius: calc(var(--r-lg) - 10px);
+  border:1px solid rgba(255,255,255,.06);
+  box-shadow:
+    0 0 0 1px rgba(16,176,240,.12) inset,
+    0 0 0 1px rgba(240,16,16,.08) inset,
+    0 0 28px rgba(16,176,240,.10),
+    0 0 28px rgba(240,16,16,.08);
+  pointer-events:none;
+}
+
+.rightbar{display:flex;align-items:center;gap:14px}
+.brandlogo{
+  display:block;
+  height:72px;
+  width:auto;
+  object-fit:contain;
+  filter: drop-shadow(0 8px 18px rgba(0,0,0,.55));
+}
+h1{margin:0;font-size:22px;letter-spacing:.3px}
+.topbar h1{
+  text-transform: uppercase;
+  letter-spacing: 1.6px;
+  text-shadow:
+    0 0 18px rgba(16,176,240,.25),
+    0 0 16px rgba(240,16,16,.15);
+}
+.sub{margin:6px 0 0;color:var(--muted);font-size:13px}
+.topbar .sub{
+  letter-spacing:.9px;
+  text-transform: uppercase;
+  color: rgba(200,220,255,.72);
+}
+
+.status{display:flex;align-items:center;gap:12px}
+.pill{
+  padding:8px 12px;border-radius:999px;border:1px solid var(--line);
+  background: rgba(8,12,18,.8);
+  color:var(--muted);
+  font-weight:700;
+  font-size:13px;
+  letter-spacing:.2px;
+  box-shadow: 0 6px 18px rgba(0,0,0,.35);
+}
+.pill.live{
+  border-color:rgba(16,176,240,.6);
+  color:rgba(200,245,255,.98);
+  box-shadow: 0 0 0 1px rgba(16,176,240,.25) inset, 0 0 22px rgba(16,176,240,.18);
+}
+.pill.off{
+  border-color:rgba(240,16,16,.55);
+  color:rgba(255,210,210,.96);
+  box-shadow: 0 0 0 1px rgba(240,16,16,.22) inset, 0 0 22px rgba(240,16,16,.12);
+}
+
+.btnrow{display:flex;gap:8px}
+.btn{
+  border:1px solid rgba(255,255,255,.10);
+  background: linear-gradient(180deg, rgba(9,12,20,.82), rgba(5,7,12,.72));
+  color:var(--text);
+  padding:10px 12px;
+  border-radius:12px;
+  cursor:pointer;
+  transition:
+    transform .06s ease,
+    border-color .12s ease,
+    box-shadow .12s ease,
+    filter .12s ease,
+    opacity .12s ease;
+  box-shadow: 0 10px 18px rgba(0,0,0,.35);
+}
+.btn:hover{
+  border-color:rgba(16,176,240,.42);
+  box-shadow:
+    0 12px 22px rgba(0,0,0,.45),
+    0 0 0 1px rgba(16,176,240,.18) inset,
+    0 0 26px rgba(16,176,240,.16);
+}
+.btn.primary{background:rgba(16,176,240,.12); border-color:rgba(16,176,240,.35)}
+.btn.small{padding:8px 10px;border-radius:10px;font-size:13px}
+
+/* Start/Stop button color coding */
+.btn.start{
+  background: linear-gradient(180deg, rgba(16,176,240,.22), rgba(16,176,240,.10));
+  border-color: rgba(16,176,240,.62);
+  box-shadow:
+    0 10px 18px rgba(0,0,0,.35),
+    0 0 0 1px rgba(16,176,240,.20) inset,
+    0 0 28px rgba(16,176,240,.20);
+}
+.btn.stop{
+  background: linear-gradient(180deg, rgba(240,16,16,.18), rgba(240,16,16,.08));
+  border-color: rgba(240,16,16,.62);
+  box-shadow:
+    0 10px 18px rgba(0,0,0,.35),
+    0 0 0 1px rgba(240,16,16,.18) inset,
+    0 0 28px rgba(240,16,16,.18);
+}
+
+/* When the system is Live, make the relevant button pop */
+.btn.start.active{filter: brightness(1.22); animation: pulseCyan 1.4s ease-in-out infinite}
+.btn.stop.active{filter: brightness(1.22); animation: pulseRed 1.4s ease-in-out infinite}
+
+@keyframes pulseCyan{
+  0%,100%{box-shadow: 0 10px 18px rgba(0,0,0,.35), 0 0 0 1px rgba(16,176,240,.22) inset, 0 0 28px rgba(16,176,240,.22)}
+  50%{box-shadow: 0 12px 22px rgba(0,0,0,.45), 0 0 0 1px rgba(16,176,240,.28) inset, 0 0 44px rgba(16,176,240,.32)}
+}
+@keyframes pulseRed{
+  0%,100%{box-shadow: 0 10px 18px rgba(0,0,0,.35), 0 0 0 1px rgba(240,16,16,.20) inset, 0 0 28px rgba(240,16,16,.20)}
+  50%{box-shadow: 0 12px 22px rgba(0,0,0,.45), 0 0 0 1px rgba(240,16,16,.26) inset, 0 0 44px rgba(240,16,16,.30)}
+}
+/* When not active, keep the buttons slightly subdued */
+.btn.start:not(.active), .btn.stop:not(.active){filter: brightness(.92)}
+
+.btn:active{transform: translateY(1px)}
+
+.panel{
+  margin-top:16px;
+  border:1px solid rgba(255,255,255,.08);
+  border-radius:var(--r-lg);
+  background: linear-gradient(180deg, rgba(10,15,24,.74), rgba(6,9,14,.62));
+  padding:16px;
+  box-shadow: var(--shadow);
+  position:relative;
+  overflow:hidden;
+}
+.panel:before{
+  content:"";
+  position:absolute; inset:-2px;
+  background:
+    linear-gradient(90deg, rgba(16,176,240,.16), transparent 30%, rgba(240,16,16,.12) 70%, transparent),
+    radial-gradient(600px 220px at 0% 0%, rgba(16,176,240,.16), transparent 60%),
+    radial-gradient(600px 220px at 100% 0%, rgba(240,16,16,.12), transparent 60%);
+  opacity:.6;
+  pointer-events:none;
+  filter: blur(10px);
+}
+.panelhead{display:flex;align-items:center;justify-content:space-between;gap:12px}
+h2{margin:0;font-size:16px}
+.panelhead h2{
+  text-transform: uppercase;
+  letter-spacing: 1.1px;
+  text-shadow: 0 0 16px rgba(16,176,240,.18);
+}
+.hint{margin:0;color:var(--muted);font-size:13px}
+
+.sources{
+  margin-top:12px;
+  display:flex;flex-wrap:wrap;gap:8px;
+  color:var(--muted);
+}
+.tag{
+  padding:8px 10px;border:1px solid var(--line);border-radius:999px;
+  background: rgba(15,21,33,.6);
+  font-size:13px;
+}
+
+.grid{
+  margin-top:14px;
+  display:grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap:12px;
+}
+.card{
+  border:1px solid rgba(255,255,255,.08);
+  border-radius:16px;
+  background: linear-gradient(180deg, rgba(12,17,27,.85), rgba(9,12,20,.78));
+  padding:14px;
+  box-shadow: 0 10px 22px rgba(0,0,0,.35);
+  position:relative;
+  overflow:hidden;
+}
+.card:before{
+  content:"";
+  position:absolute; inset:-2px;
+  background:
+    radial-gradient(420px 180px at 20% 0%, rgba(16,176,240,.12) 0%, transparent 60%),
+    radial-gradient(420px 180px at 100% 20%, rgba(240,16,16,.10) 0%, transparent 60%);
+  pointer-events:none;
+}
+.card:hover{
+  border-color:rgba(16,176,240,.25);
+}
+.cardhead{display:flex;justify-content:space-between;align-items:center}
+.slotnum{font-weight:800; letter-spacing:.2px}
+.addr{color:var(--muted);font-size:12px}
+
+.field{margin-top:10px;display:flex;flex-direction:column;gap:6px}
+label{color:var(--muted);font-size:12px}
+select,input{
+  width:100%;
+  padding:10px 10px;
+  border-radius:12px;
+  border:1px solid rgba(255,255,255,.10);
+  background: rgba(7,10,16,.72);
+  color:var(--text);
+  outline:none;
+  box-shadow: 0 10px 18px rgba(0,0,0,.25);
+}
+select:focus,input:focus{
+  border-color: rgba(16,176,240,.55);
+  box-shadow:
+    0 0 0 3px rgba(16,176,240,.18),
+    0 0 28px rgba(16,176,240,.12),
+    0 10px 18px rgba(0,0,0,.25);
+}
+select:disabled,input:disabled{opacity:.55;cursor:not-allowed}
+
+.foot{margin-top:16px;color:var(--muted);font-size:12px}
+@media (max-width: 820px){
+  .grid{grid-template-columns:1fr}
+  .topbar{flex-direction:column;align-items:stretch}
+  .rightbar{justify-content:space-between}
+  .status{justify-content:space-between}
+}
+
+button:disabled{opacity:.55;cursor:not-allowed}

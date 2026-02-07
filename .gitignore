@@ -9,3 +9,8 @@ __pycache__/
 node_modules/
 dist/
 build/
+
+# SSH keys
+squirrel
+*.key
+*.pem

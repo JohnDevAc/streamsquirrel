@@ -27,7 +27,7 @@ source .venv/bin/activate
 pip install -r requirements.txt
 ```
 
-## Install apt-get  (This is very early days so your milage may vary, INSTALL NDI SDK FIRST)
+## Install via apt-get, INSTALL NDI SDK FIRST.
 
 Download the NDI SDK from 
 https://ndi.video/for-developers/ndi-sdk/
@@ -51,7 +51,7 @@ sudo ldconfig
 
 ADD REPO & Update and then INSTALL
 
-1) Add your repo signing key
+1) Add the repo signing key
 ```bash
 sudo mkdir -p /etc/apt/keyrings
 curl -fsSL https://johndevac.github.io/streamsquirrel/streamsquirrel.gpg.asc \

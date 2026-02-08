@@ -31,8 +31,8 @@ GOLDEN IMAGE WILL LIKLY BE BEHIND THE CURRENT CODEBASE, YOU CAN REPLACE PROJECT 
 Download, unrar, image to sd card and pop it in your PI5
 
 SSH: admin:admin
-
 NOTE THE IMAGE DISABLES WLAN0 ON BOOT THIS IS ETH0 ONLY.
+
 ------------------------------------------------------------------------------------
 
 For those with time and curiosity..

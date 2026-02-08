@@ -32,6 +32,7 @@ Download, unrar, image to sd card and pop it in your PI5
 
 SSH: admin:admin
 
+NOTE THE IMAGE DISABLES WLAN0 ON BOOT THIS IS ETH0 ONLY.
 ------------------------------------------------------------------------------------
 
 For those with time and curiosity..
@@ -61,6 +62,7 @@ sudo ldconfig
 ```
 
 ## Notes / Limitations
+- THE GOLDEN IMAGE WILL DISABLE YOUR WIFI ON BOOT THIS IS ETH0 ONLY
 - This implementation expects NDI audio frames to be Float32 planar, which is typical for NDI SDK audio v2.
 - The bridge currently supports **48kHz, 2-channel** AES67 output.
   - If the NDI source is not 48kHz or not 2ch, the pipeline will refuse to start for that slot.

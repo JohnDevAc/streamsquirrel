@@ -26,7 +26,7 @@ https://www.johnlightfoot.biz/streamsquirrel.rar
 
 Download, unrar, image to sd card.
 
-if using source files on this repo, be aware you will need the NDI SDK, setup of systemd service for boot and persistent permissions for user: "steamsquirrel" as root with no password for sudo.
+if using source files on this repo, be aware you will need the NDI SDK + prereq listed in requirements.txt , setup of systemd service for boot and persistent permissions for user: "steamsquirrel" as root with no password for sudo. There is probably more!
 
 INSTALL NDI SDK FIRST
 

@@ -20,12 +20,13 @@ It also announces the AES67 streams via SAP/SDP for discovery by Dante AES67 rec
    - Ensure the loader can find it: `ldconfig -p | grep ndi` or set `LD_LIBRARY_PATH`.
 
 ## Install
-```bash
-cd ndi_aes67_pi
-python3 -m venv .venv
-source .venv/bin/activate
-pip install -r requirements.txt
-```
+
+Golden Image
+https://www.johnlightfoot.biz/streamsquirrel.rar
+
+Download, unrar, image to sd card.
+
+if using source files on this repo, be aware you will need the NDI SDK, setup of systemd service for boot and persistent permissions for user: "steamsquirrel" as root with no password for sudo.
 
 INSTALL NDI SDK FIRST
 

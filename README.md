@@ -38,7 +38,7 @@ Your package expects libndi.so to exist at:
 
 So after you install the NDI runtime (from the NDI SDK), make it readable and registered:
 
-# Copy the correct one for aarch64 (Pi 4/5 64-bit) into /usr/local/lib
+## Copy the correct one for aarch64 (Pi 4/5 64-bit) into /usr/local/lib
 ```bash
 sudo cp -f "/path/to/NDI SDK for Linux/lib/aarch64-rpi4-linux-gnueabi/libndi.so.6.2.1" /usr/local/lib/libndi.so.6.2.1
 sudo ln -sf /usr/local/lib/libndi.so.6.2.1 /usr/local/lib/libndi.so.6

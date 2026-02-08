@@ -15,10 +15,28 @@ from system_utils import (
     get_network_state,
     apply_network_config,
     get_system_info,
+    get_last_logs,
+    disable_wlan0_on_startup,
+    restart_program,
+    reboot_pi,
 )
 
 app = FastAPI()
 app.mount("/static", StaticFiles(directory="static"), name="static")
+
+
+@app.on_event("startup")
+def _startup_disable_wlan0():
+    """Disable wlan0 at boot (best-effort).
+
+    The user requirement is for wlan0 to be disabled on Pi startup. Since this
+    service starts at boot, we do it here via NetworkManager.
+    """
+    try:
+        disable_wlan0_on_startup()
+    except Exception as e:
+        # Never block startup
+        print(f"[startup] wlan0 disable failed: {e}")
 
 running = False
 pipelines: Dict[int, SlotPipeline] = {}
@@ -63,6 +81,26 @@ def api_set_system_network(body: dict):
 @app.get("/api/system/info")
 def api_system_info():
     return get_system_info()
+
+
+@app.get("/api/system/logs")
+def api_system_logs():
+    return get_last_logs(20)
+
+
+@app.post("/api/system/restart_program")
+def api_restart_program():
+    """Restart the Stream Squirrel service.
+
+    Typically relies on systemd (sudo may be required).
+    """
+    return restart_program()
+
+
+@app.post("/api/system/reboot")
+def api_reboot_pi():
+    """Reboot the Raspberry Pi (best-effort)."""
+    return reboot_pi()
 
 @app.get("/api/sources", response_model=List[NDISource])
 def api_sources():

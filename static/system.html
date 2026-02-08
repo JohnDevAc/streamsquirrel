@@ -15,8 +15,11 @@
           <p class="sub">Network + System Info</p>
         </div>
 
-        <!-- Keep header sizing/layout identical to Home page (center column) -->
-        <div class="pill off statusbar" style="visibility:hidden">Offline</div>
+        <!-- Center header actions (Restart/Reboot) -->
+        <div class="headerCenter">
+          <button class="btn small start" id="restartProgramBtn" type="button">Restart Program</button>
+          <button class="btn small stop" id="rebootPiBtn" type="button">Reboot Pi</button>
+        </div>
 
         <div class="rightbar">
           <a class="btn small navbtn" href="/">Home</a>
@@ -140,6 +143,25 @@
           </div>
         </div>
       </div>
+    </section>
+
+
+    <section class="panel">
+      <div class="panelhead">
+        <h2>Program Logs</h2>
+        <p class="hint">Last 20 lines from the service log (if available).</p>
+      </div>
+
+      <details id="logsDetails" class="details">
+        <summary class="btn small">Show logs</summary>
+        <div style="margin-top:10px">
+          <div style="display:flex; gap:10px; align-items:center; margin-bottom:10px">
+            <button class="btn small" id="logsRefreshBtn" type="button">Refresh logs</button>
+            <span class="hint" id="logsMeta">—</span>
+          </div>
+          <pre class="logbox" id="logsBox">—</pre>
+        </div>
+      </details>
     </section>
 
     <footer class="foot">

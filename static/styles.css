@@ -94,6 +94,14 @@ body:after{
 }
 .leftbar{justify-self:start}
 .rightbar{justify-self:end}
+.headerCenter{
+  justify-self:center;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:10px;
+  flex-wrap:wrap;
+}
 .statusbar{
   /* Live status bar (centered in header area) */
   margin:0;
@@ -391,3 +399,19 @@ select:disabled,input:disabled{opacity:.55;cursor:not-allowed}
 }
 
 button:disabled{opacity:.55;cursor:not-allowed}
+
+
+/* System logs */
+.details summary{list-style:none}
+.details summary::-webkit-details-marker{display:none}
+.logbox{
+  background: rgba(255,255,255,.04);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 12px;
+  max-height: 260px;
+  overflow: auto;
+  font-size: 12px;
+  line-height: 1.4;
+  white-space: pre-wrap;
+}

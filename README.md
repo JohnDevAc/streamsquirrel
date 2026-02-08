@@ -28,10 +28,11 @@ https://www.johnlightfoot.biz/streamsquirrel.rar
 
 GOLDEN IMAGE WILL LIKLY BE BEHIND THE CURRENT CODEBASE, YOU CAN REPLACE PROJECT FILES ON THE PI FROM THIS REPO ONCE YOU HAVE THE IMAGE RUNNING TO UPDATE.
 
+NOTE THE IMAGE DISABLES WLAN0 ON BOOT THIS IS ETH0 ONLY.
+
 Download, unrar, image to sd card and pop it in your PI5
 
 SSH: admin:admin
-NOTE THE IMAGE DISABLES WLAN0 ON BOOT THIS IS ETH0 ONLY.
 
 ------------------------------------------------------------------------------------
 

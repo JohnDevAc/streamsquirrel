@@ -24,6 +24,11 @@ It also announces the AES67 streams via SAP/SDP for discovery by Dante AES67 rec
 Golden Image
 https://www.johnlightfoot.biz/streamsquirrel.rar
 
+GOLDEN IMAGE WILL LIKLY BE BEHIND THE CURRENT CODEBASE, YOU CAN REPLACE PROJECT FILES ON THE PI FROM THIS REPO ONCE YOU HAVE THE IMAGE RUNNING TO UPDATE.
+
+SSH: admin:admin
+
+
 Download, unrar, image to sd card.
 
 if using source files on this repo, be aware you will need the NDI SDK + prereq listed in requirements.txt , setup of systemd service for boot and persistent permissions for user: "steamsquirrel" as root with no password for sudo. There is probably more!

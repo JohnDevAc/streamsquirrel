@@ -27,6 +27,42 @@ source .venv/bin/activate
 pip install -r requirements.txt
 ```
 
+## Install apt-get  (This is very early days so your milage may vary, INSTALL NDI SDK FIRST)
+
+Download the NDI SDK from 
+https://ndi.video/for-developers/ndi-sdk/
+
+Your package expects libndi.so to exist at:
+
+/usr/local/lib/libndi.so
+
+So after you install the NDI runtime (from the NDI SDK), make it readable and registered:
+
+# Copy the correct one for aarch64 (Pi 4/5 64-bit) into /usr/local/lib
+sudo cp -f "/path/to/NDI SDK for Linux/lib/aarch64-rpi4-linux-gnueabi/libndi.so.6.2.1" /usr/local/lib/libndi.so.6.2.1
+sudo ln -sf /usr/local/lib/libndi.so.6.2.1 /usr/local/lib/libndi.so.6
+sudo ln -sf /usr/local/lib/libndi.so.6 /usr/local/lib/libndi.so
+
+sudo chown root:root /usr/local/lib/libndi.so.6.2.1
+sudo chmod 0644 /usr/local/lib/libndi.so.6.2.1
+sudo ldconfig
+
+ADD REPO & Update and then INSTALL
+
+1) Add your repo signing key
+sudo mkdir -p /etc/apt/keyrings
+curl -fsSL https://johndevac.github.io/streamsquirrel/streamsquirrel.gpg.asc \
+  | sudo gpg --dearmor -o /etc/apt/keyrings/streamsquirrel.gpg
+sudo chmod 0644 /etc/apt/keyrings/streamsquirrel.gpg
+
+2) Add the APT repo
+echo "deb [signed-by=/etc/apt/keyrings/streamsquirrel.gpg] https://johndevac.github.io/streamsquirrel stable main" \
+  | sudo tee /etc/apt/sources.list.d/streamsquirrel.list > /dev/null
+
+3) Install
+sudo apt-get update
+sudo apt-get install -y streamsquirrel
+
 ## Run
 ```bash
 source .venv/bin/activate

@@ -27,7 +27,7 @@ source .venv/bin/activate
 pip install -r requirements.txt
 ```
 
-## Install via apt-get, INSTALL NDI SDK FIRST.
+INSTALL NDI SDK FIRST
 
 Download the NDI SDK from 
 https://ndi.video/for-developers/ndi-sdk/
@@ -48,35 +48,6 @@ sudo chown root:root /usr/local/lib/libndi.so.6.2.1
 sudo chmod 0644 /usr/local/lib/libndi.so.6.2.1
 sudo ldconfig
 ```
-
-ADD REPO & Update and then INSTALL
-
-1) Add the repo signing key
-```bash
-sudo mkdir -p /etc/apt/keyrings
-curl -fsSL https://johndevac.github.io/streamsquirrel/streamsquirrel.gpg.asc \
-  | sudo gpg --dearmor -o /etc/apt/keyrings/streamsquirrel.gpg
-sudo chmod 0644 /etc/apt/keyrings/streamsquirrel.gpg
-```
-2) Add the APT repo
-```bash
-echo "deb [signed-by=/etc/apt/keyrings/streamsquirrel.gpg] https://johndevac.github.io/streamsquirrel stable main" \
-  | sudo tee /etc/apt/sources.list.d/streamsquirrel.list > /dev/null
-```
-3) Install
-```bash
-sudo apt-get update
-sudo apt-get install -y streamsquirrel
-```
-## Run
-```bash
-source .venv/bin/activate
-export NDI_LIB=/path/to/libndi.so   # optional if not in default loader path
-uvicorn app:app --host 0.0.0.0 --port 8080
-```
-
-Open:
-- `http://<pi-ip>:8080`
 
 ## Notes / Limitations
 - This implementation expects NDI audio frames to be Float32 planar, which is typical for NDI SDK audio v2.

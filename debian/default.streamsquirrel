@@ -1,6 +1,0 @@
-# Stream Squirrel overrides
-HOST=0.0.0.0
-PORT=8080
-# NDI_LIB=/usr/local/lib/libndi.so
-# MCAST_IFACE=eth0
-# UVICORN_ARGS=--workers 1

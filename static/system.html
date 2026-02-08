@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Stream Squirrel • System Control</title>
+  <link rel="stylesheet" href="/static/styles.css"/>
+</head>
+<body>
+  <div class="wrap">
+    <header class="topbar">
+      <div class="toprow">
+        <div class="leftbar">
+          <h1>System Control</h1>
+          <p class="sub">Network + System Info</p>
+        </div>
+
+        <!-- Keep header sizing/layout identical to Home page (center column) -->
+        <div class="pill off statusbar" style="visibility:hidden">Offline</div>
+
+        <div class="rightbar">
+          <a class="btn small navbtn" href="/">Home</a>
+          <img id="brandLogo" class="brandlogo" src="/static/streamsquirrel_logo.png" alt="Stream Squirrel"/>
+        </div>
+      </div>
+    </header>
+
+    <section class="panel">
+      <div class="panelhead">
+        <h2>Network Settings (eth0)</h2>
+        <p class="hint">Changing settings typically requires root privileges on the Pi. Some changes may need a reboot or link renegotiation.</p>
+      </div>
+
+      <div class="grid2">
+        <div class="card">
+          <div class="cardhead">
+            <div class="slotnum">Current</div>
+            <div class="addr" id="linkSpeed">Link: —</div>
+          </div>
+
+          <div class="kv">
+            <div class="k">Hostname</div>
+            <div class="v" id="curHostname">—</div>
+          </div>
+          <div class="kv">
+            <div class="k">IP Address</div>
+            <div class="v" id="curIp">—</div>
+          </div>
+          <div class="kv">
+            <div class="k">Gateway</div>
+            <div class="v" id="curGw">—</div>
+          </div>
+          <div class="kv">
+            <div class="k">DNS</div>
+            <div class="v" id="curDns">—</div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="cardhead">
+            <div class="slotnum">Configure</div>
+            <div class="addr" id="cfgSummary">—</div>
+          </div>
+
+          <div class="field">
+            <label>Hostname</label>
+            <input id="hostname" type="text" placeholder="e.g. streamsquirrel"/>
+          </div>
+
+          <div class="field">
+            <label>Mode</label>
+            <select id="mode">
+              <option value="dhcp">DHCP</option>
+              <option value="static">Static</option>
+            </select>
+          </div>
+
+          <div id="staticFields" style="display:none">
+            <div class="field">
+              <label>Static IP</label>
+              <input id="ip" type="text" placeholder="192.168.1.50"/>
+            </div>
+            <div class="field">
+              <label>Prefix (CIDR)</label>
+              <input id="prefix" type="number" min="0" max="32" placeholder="24"/>
+            </div>
+            <div class="field">
+              <label>Gateway</label>
+              <input id="gateway" type="text" placeholder="192.168.1.1"/>
+            </div>
+            <div class="field">
+              <label>DNS Servers</label>
+              <input id="dns" type="text" placeholder="1.1.1.1, 8.8.8.8"/>
+              <div class="hint">Comma or space separated.</div>
+            </div>
+          </div>
+
+          <div class="btnrow" style="justify-content:flex-end; margin-top:10px">
+            <button class="btn" id="applyBtn">Apply</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel">
+      <div class="panelhead">
+        <h2>System Info</h2>
+        <p class="hint">Live snapshot (polled).</p>
+      </div>
+
+      <div class="grid3">
+        <div class="card">
+          <div class="cardhead">
+            <div class="slotnum">CPU Usage</div>
+            <div class="addr" id="cpuUsage">—</div>
+          </div>
+          <div class="kv">
+            <div class="k">Load Avg</div>
+            <div class="v" id="loadAvg">—</div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="cardhead">
+            <div class="slotnum">CPU Temp</div>
+            <div class="addr" id="cpuTemp">—</div>
+          </div>
+          <div class="kv">
+            <div class="k">Uptime</div>
+            <div class="v" id="uptime">—</div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="cardhead">
+            <div class="slotnum">Bridge</div>
+            <div class="addr" id="bridgeState">—</div>
+          </div>
+          <div class="kv">
+            <div class="k">Active Slots</div>
+            <div class="v" id="activeSlots">—</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="foot">
+      <span>Tip: If you lose access after changing IP, connect via HDMI/USB console to recover network settings.</span>
+    </footer>
+  </div>
+
+  <script src="/static/system.js"></script>
+</body>
+</html>

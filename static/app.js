@@ -31,6 +31,10 @@ function setStatusUI(isRunning, msg){
   pill.classList.toggle("live", isRunning);
   pill.classList.toggle("off", !isRunning);
 
+  // NDI refresh button should not be usable while Live
+  const ndiRefreshBtn = document.getElementById("ndiRefreshBtn");
+  if (ndiRefreshBtn) ndiRefreshBtn.disabled = isRunning;
+
   // Start/Stop active brightness
   const startBtn = document.getElementById("startBtn");
   const stopBtn = document.getElementById("stopBtn");
@@ -39,6 +43,16 @@ function setStatusUI(isRunning, msg){
 
   // lock controls when Live
   document.querySelectorAll("select,input").forEach(x => x.disabled = isRunning);
+}
+
+async function refreshNdiSources(){
+  if (running) return;
+  try{
+    sources = await apiGet("/api/sources");
+    renderSources();
+    renderSlots();
+    setStatusUI(running);
+  }catch(e){}
 }
 
 function updateSdpButtons(){
@@ -179,6 +193,10 @@ async function refreshAll(){
 
 const _refreshBtn = document.getElementById("refreshBtn");
 if (_refreshBtn) _refreshBtn.addEventListener("click", refreshAll);
+
+const _ndiRefreshBtn = document.getElementById("ndiRefreshBtn");
+if (_ndiRefreshBtn) _ndiRefreshBtn.addEventListener("click", refreshNdiSources);
+
 
 document.getElementById("startBtn").addEventListener("click", async () => {
   const st = await apiPost("/api/start");

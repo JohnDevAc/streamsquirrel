@@ -79,12 +79,35 @@ body:after{
 
 .wrap{max-width:1100px;margin:0 auto;padding:24px}
 .topbar{
-  display:flex;gap:16px;align-items:center;justify-content:space-between;
-  padding:18px 18px;
+  /* Header container (keep it tight; no reserved space) */
+  padding:14px 18px;
   border-radius:var(--r-lg);
   position:relative;
   background: linear-gradient(180deg, rgba(12,17,27,.92), rgba(9,12,20,.88));
   box-shadow: var(--shadow);
+}
+.toprow{
+  display:grid;
+  grid-template-columns: 1fr auto 1fr;
+  column-gap:16px;
+  align-items:center;
+}
+.leftbar{justify-self:start}
+.rightbar{justify-self:end}
+.statusbar{
+  /* Live status bar (centered in header area) */
+  margin:0;
+  width:180px; /* ~50% narrower than before */
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  border-radius:12px;
+  padding:3px 12px; /* thinner */
+  font-size:12px;
+}
+@media (max-width: 520px){
+  .statusbar{width: calc(100% - 44px);}
 }
 
 /* neon border */
@@ -221,6 +244,27 @@ h1{margin:0;font-size:22px;letter-spacing:.3px}
     0 0 28px rgba(240,16,16,.18);
 }
 
+/* --- System page helpers (keeps same theme) --- */
+.grid2{display:grid; gap:14px; grid-template-columns: 1fr 1fr}
+.grid3{display:grid; gap:14px; grid-template-columns: 1fr 1fr 1fr}
+@media (max-width: 980px){
+  .grid2{grid-template-columns:1fr}
+  .grid3{grid-template-columns:1fr}
+}
+
+.kv{
+  display:flex;
+  justify-content:space-between;
+  gap:12px;
+  padding:10px 12px;
+  border-radius:12px;
+  background: rgba(8,12,18,.55);
+  border: 1px solid rgba(255,255,255,.06);
+  margin-top:10px;
+}
+.kv .k{color: var(--muted); font-size:13px}
+.kv .v{font-weight:700; color: rgba(234,243,255,.98)}
+
 /* When the system is Live, make the relevant button pop */
 .btn.start.active{filter: brightness(1.22); animation: pulseCyan 1.4s ease-in-out infinite}
 .btn.stop.active{filter: brightness(1.22); animation: pulseRed 1.4s ease-in-out infinite}
@@ -259,7 +303,7 @@ h1{margin:0;font-size:22px;letter-spacing:.3px}
   pointer-events:none;
   filter: blur(10px);
 }
-.panelhead{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.panelhead{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:10px}
 h2{margin:0;font-size:16px}
 .panelhead h2{
   text-transform: uppercase;
@@ -267,6 +311,12 @@ h2{margin:0;font-size:16px}
   text-shadow: 0 0 16px rgba(16,176,240,.18);
 }
 .hint{margin:0;color:var(--muted);font-size:13px}
+
+/* Hint text + action button row */
+.hintrow{display:flex;align-items:center;justify-content:flex-end;gap:10px;flex-wrap:wrap}
+
+/* Nav button (System/Back) should read as a distinct feature from status */
+.navbtn{margin-right:10px}
 
 .sources{
   margin-top:12px;
@@ -333,7 +383,9 @@ select:disabled,input:disabled{opacity:.55;cursor:not-allowed}
 .foot{margin-top:16px;color:var(--muted);font-size:12px}
 @media (max-width: 820px){
   .grid{grid-template-columns:1fr}
-  .topbar{flex-direction:column;align-items:stretch}
+  .toprow{grid-template-columns:1fr;row-gap:12px;justify-items:stretch}
+  .leftbar{text-align:center}
+  .statusbar{justify-self:center}
   .rightbar{justify-content:space-between}
   .status{justify-content:space-between}
 }

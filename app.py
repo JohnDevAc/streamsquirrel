@@ -11,6 +11,12 @@ from pipeline import SlotPipeline
 from sap import build_sdp
 from config import DEFAULT_SLOTS, SDP_SESSION_NAME_PREFIX
 
+from system_utils import (
+    get_network_state,
+    apply_network_config,
+    get_system_info,
+)
+
 app = FastAPI()
 app.mount("/static", StaticFiles(directory="static"), name="static")
 
@@ -31,6 +37,32 @@ for i, (ip, port) in enumerate(DEFAULT_SLOTS, start=1):
 @app.get("/")
 def index():
     return FileResponse("static/index.html")
+
+
+@app.get("/system")
+def system_page():
+    """System control page (network + system info)."""
+    return FileResponse("static/system.html")
+
+
+@app.get("/api/system/network")
+def api_system_network():
+    """Return hostname + current/configured network state for eth0."""
+    return get_network_state(iface="eth0")
+
+
+@app.post("/api/system/network")
+def api_set_system_network(body: dict):
+    """Apply network settings (DHCP/Static) and optionally set hostname.
+
+    Note: On a Pi this generally requires root privileges.
+    """
+    return apply_network_config(iface="eth0", payload=body)
+
+
+@app.get("/api/system/info")
+def api_system_info():
+    return get_system_info()
 
 @app.get("/api/sources", response_model=List[NDISource])
 def api_sources():

@@ -85,12 +85,8 @@ If Start appears to do nothing, it is usually because the receiver failed to con
 ## SDP download
 Each active slot shows a **Download SDP** button in the UI. The button is enabled only when that slot is Live/outputting AES67.
 
-## VLC monitoring
-VLC often does not decode AES67 `L24` RTP. This build also outputs an optional monitor stream per active slot:
-- Codec: L16/48000/2
 - Port: base_port + 2 (e.g. 5006 when AES67 is 5004)
 
-Use **Download SDP (Monitor L16)** in the UI and open that SDP in VLC.
 
 ## PTP attributes in SDP
 If you want Dante-style PTP SDP attributes, set:

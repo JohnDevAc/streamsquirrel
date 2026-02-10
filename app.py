@@ -136,7 +136,7 @@ def api_slot_sdp(slot_id: int):
         if not slot or not slot.ndi_source_name:
             return Response(status_code=404)
 
-        sdp = build_sdp(slot.aes67_stream_name, slot.mcast_ip, slot.mcast_port)
+        sdp, _ident = build_sdp(slot.aes67_stream_name, slot.mcast_ip, slot.mcast_port)
 
         # Use a conservative filename to avoid header issues on some browsers/servers
         headers = {
@@ -148,23 +148,6 @@ def api_slot_sdp(slot_id: int):
         print(f"[SDP] slot {slot_id} error: {e}")
         return Response(status_code=500)
 
-
-@app.get("/api/slot/{slot_id}/sdp_monitor")
-def api_slot_sdp_monitor(slot_id: int):
-    """Download VLC-friendly monitor SDP (L16) for an active slot."""
-    global running, pipelines, slots
-    if not running or slot_id not in pipelines:
-        return Response(status_code=404)
-    slot = next((s for s in slots if s.slot_id == slot_id), None)
-    if not slot or not slot.ndi_source_name:
-        return Response(status_code=404)
-
-    # Monitor port is base port + 2 (see config.py)
-    from config import MONITOR_PAYLOAD_TYPE, MONITOR_PORT_OFFSET
-    mon_port = int(slot.mcast_port) + int(MONITOR_PORT_OFFSET)
-    sdp = build_sdp(slot.aes67_stream_name + " (Monitor L16)", slot.mcast_ip, mon_port, payload_type=MONITOR_PAYLOAD_TYPE, codec="L16")
-    headers = {"Content-Disposition": f'attachment; filename="slot{slot_id}_monitor.sdp"'}
-    return Response(content=sdp, media_type="application/sdp", headers=headers)
 
 @app.get("/api/active_slots")
 def api_active_slots():

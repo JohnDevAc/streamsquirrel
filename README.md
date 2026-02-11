@@ -10,7 +10,6 @@ It also announces the AES67 streams via SAP/SDP for discovery by Dante AES67 rec
 - Configuration is locked while running
 - Status panel: Live / Offline
 - AES67: RTP L24/48kHz/2ch, 1ms packets (48 samples/channel)
-- SAP: periodic announcements to 224.2.127.254:9875
 
 ## Prerequisites
 1. Raspberry Pi 5 (64-bit Raspberry Pi OS recommended)
@@ -67,10 +66,6 @@ sudo ldconfig
 - This implementation expects NDI audio frames to be Float32 planar, which is typical for NDI SDK audio v2.
 - The bridge currently supports **48kHz, 2-channel** AES67 output.
   - If the NDI source is not 48kHz or not 2ch, the pipeline will refuse to start for that slot.
-- For production, consider:
-  - Adding resampling & downmix/upmix
-  - Tighter RTP pacing with a dedicated clock
-  - PTP (ptp4l/phc2sys) on the network, as AES67 expects PTP
 
 ## Troubleshooting
 - If no NDI sources appear:

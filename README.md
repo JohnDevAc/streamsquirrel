@@ -23,14 +23,13 @@ It also announces the AES67 streams via SAP/SDP for discovery by Dante AES67 rec
 Easy:
 
 Golden Image
-https://www.johnlightfoot.biz/streamsquirrel.rar
+https://www.johnlightfoot.biz/streamsquirrel.img.gz
 
 GOLDEN IMAGE WILL LIKELY BE BEHIND THE CURRENT CODEBASE, YOU CAN REPLACE PROJECT FILES ON THE PI FROM THIS REPO ONCE YOU HAVE THE IMAGE RUNNING TO UPDATE. A NEW IMAGE WILL BE ISSUED PERIODICALLY OR IF SYSTEM LEVEL CHANGES BREAK UPDATING MANUALLY.
 
 NOTE THE IMAGE DISABLES WLAN0 ON BOOT THIS IS ETH0 ONLY.
 
-Download, unrar, image to sd card and pop it in your PI5
-
+Download, unzip, image to sd card, boot, expand fs
 SSH: admin:admin
 
 ------------------------------------------------------------------------------------

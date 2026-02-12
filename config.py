@@ -10,7 +10,7 @@ AES67_PAYLOAD_TYPE = 96
 
 # Packetization: default 4ms @ 48kHz => 192 samples/channel.
 # (1ms/48 samples is valid but is much more sensitive to CPU jitter and network micro-bursts.)
-AES67_SAMPLES_PER_PACKET = 192
+AES67_SAMPLES_PER_PACKET = 48
 
 # ------------------------------
 # SAP (AES67 discovery)
@@ -36,12 +36,12 @@ PTP_GMID_ENV = "PTP_GMID"
 PTP_DOMAIN_ENV = "PTP_DOMAIN"
 
 DEFAULT_SLOTS = [
-    ("239.69.0.1", 5004),
-    ("239.69.0.2", 5004),
-    ("239.69.0.3", 5004),
-    ("239.69.0.4", 5004),
+    ("239.69.0.10", 5004),
+    ("239.69.0.11", 5004),
+    ("239.69.0.12", 5004),
+    ("239.69.0.13", 5004),
 ]
 
-SDP_ORIGIN_USER = "pi"
+SDP_ORIGIN_USER = "SSQ"
 SDP_SESSION_NAME_PREFIX = "AES67"
 
